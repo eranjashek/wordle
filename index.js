@@ -10,7 +10,7 @@ valid_input = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d",
     "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m",
     "backspace", "enter"
 ];
-easter_eggs = ["kebab", "hijab", "mango", "quake", "break"];
+easter_eggs = ["kebab", "hijab", "mango", "quake", "break", "spout"];
 
 word = words[Math.floor(Math.random() * (words.length - 1))];
 console.log(word);
@@ -42,6 +42,7 @@ function inputLetter(key) {
         index--;
         current_tile = row[index % 5];
         current_tile.innerHTML = "";
+        current_tile.classList.remove("currently");
     } else {
         if (index % 5 == 0 && index != 0) {
             count_win = 0;
@@ -56,6 +57,7 @@ function inputLetter(key) {
                 if (words.includes(guess)) {
                     index = 0;
                     index_row++;
+                    condition = "";
                     for (var i = 0; i < 5; i++) {
                         letter = row[i].innerHTML.toLowerCase();
                         for (var j = 0; j < ALPHABET + 2; j++) {
@@ -70,23 +72,29 @@ function inputLetter(key) {
                                 guess_letter.classList.toggle("somewhere");
                             }
                             guess_letter.classList.add("correct");
+                            condition = "correct";
                         } else {
                             if (word.includes(letter)) {
                                 row[i].classList.add("somewhere");
+                                condition = "somewhere";
                                 if (!guess_letter.classList.contains("correct")) {
                                     guess_letter.classList.add("somewhere");
                                 }
                             } else {
                                 row[i].classList.add("wrong");
                                 guess_letter.classList.add("wrong");
+                                condition = "wrong";
                             }
                         }
+                        row[i].classList.add("guessed");
+                        row[i].classList.remove("currently");
+                        row[i].style.animationDelay = `${(i * 600) / 2}ms`;
+                        row[i].style.transitionDelay = `${((i * 600) / 2) + 300}ms`;
                     }
                 } else {
                     alert("Not a word");
                 }
             }
-
             for (var l = 0; l < 5; l++) {
                 if (row[l].classList.contains("somewhere")) {
                     diff_chars = sumLetterInString(row[l].innerHTML.toLowerCase(), word);
@@ -115,6 +123,7 @@ function inputLetter(key) {
             if (key != "backspace" && key != "enter") {
                 current_tile = row[index % 5];
                 current_tile.innerHTML = key.toUpperCase();
+                current_tile.classList.add("currently");
                 index++;
             }
         }

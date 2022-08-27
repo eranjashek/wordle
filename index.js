@@ -10,7 +10,7 @@ valid_input = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d",
     "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m",
     "backspace", "enter"
 ];
-easter_eggs = ["kebab", "hijab", "mango", "quake", "break", "spout", "spout"];
+easter_eggs = ["kebab", "hijab", "mango", "quake", "break", "spout", "sassy"];
 
 word = words[Math.floor(Math.random() * (words.length - 1))];
 console.log(word);

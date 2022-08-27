@@ -101,3 +101,24 @@ h1 {
     display: none;
     visibility: hidden;
 }
+
+.currently {
+    border-color: #694E4E;
+}
+
+.guessed {
+    animation: flip 0.6s ease-in-out;
+    transition-property: background-color;
+}
+
+@keyframes flip {
+    0% {
+        transform: scaleY(1);
+    }
+    50% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
